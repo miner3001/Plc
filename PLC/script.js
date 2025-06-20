@@ -191,8 +191,75 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ====================================================================
-    // --- INITIALIZATION
-    // ====================================================================
-    setInterval(updateClock, 1000);
-    updateClock();
+    // --- ERROR MODAL LOGIC
+    // Errori di esempio (puoi sostituire con dati reali)
+    const errorList = [
+        "Errore 101: Sensore non rilevato.",
+        "Errore 202: Pressione bassa sull'attuatore.",
+        "Errore 303: Porta di sicurezza aperta.",
+        "Errore 404: Comunicazione PLC assente.",
+        "Errore 505: Temperatura fuori range."
+    ];
+    let currentError = 0;
+
+    function updateErrorModal() {
+        document.getElementById('error-message').textContent = errorList[currentError];
+        document.getElementById('error-index').textContent = (currentError+1) + ' / ' + errorList.length;
+    }
+
+    const showErrorsBtn = document.getElementById('show-errors-btn');
+    if(showErrorsBtn) {
+        showErrorsBtn.addEventListener('click', function() {
+            currentError = 0;
+            updateErrorModal();
+            const modal = new bootstrap.Modal(document.getElementById('errorsModal'));
+            modal.show();
+        });
+    }
+
+    const prevErrorBtn = document.getElementById('prev-error');
+    const nextErrorBtn = document.getElementById('next-error');
+    if(prevErrorBtn) {
+        prevErrorBtn.addEventListener('click', function() {
+            if(currentError > 0) {
+                currentError--;
+                updateErrorModal();
+            }
+        });
+    }
+    if(nextErrorBtn) {
+        nextErrorBtn.addEventListener('click', function() {
+            if(currentError < errorList.length-1) {
+                currentError++;
+                updateErrorModal();
+            }
+        });
+    }
+
+    // Swipe touch per mobile
+    let startX = null;
+    const errorMessageEl = document.getElementById('error-message');
+    if(errorMessageEl) {
+        errorMessageEl.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+        });
+        errorMessageEl.addEventListener('touchend', function(e) {
+            if(startX === null) return;
+            let endX = e.changedTouches[0].clientX;
+            if(endX - startX > 50) {
+                // swipe right
+                if(currentError > 0) {
+                    currentError--;
+                    updateErrorModal();
+                }
+            } else if(startX - endX > 50) {
+                // swipe left
+                if(currentError < errorList.length-1) {
+                    currentError++;
+                    updateErrorModal();
+                }
+            }
+            startX = null;
+        });
+    }
 });
