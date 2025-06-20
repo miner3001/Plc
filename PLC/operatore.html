@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIVETECH HMI - Operatore</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="hmi-container">
+        <!-- Top Bar -->
+        <div class="top-bar d-flex justify-content-between align-items-center px-3">
+            <div class="left-icons">
+                <button class="btn btn-icon" id="home-btn"><img src="Immagini PLC/home_.PNG" alt=""></button>
+                <button class="btn btn-icon"><img src="Immagini PLC/statistiche.PNG" alt=""></button>
+                <button class="btn btn-icon"><img src="Immagini PLC/Layout_blu.PNG" alt=""></button>
+                <button class="btn btn-icon"><img src="Immagini PLC/ricette.PNG" alt=""></button>
+                <button class="btn btn-icon" id="login-lock-icon"><img src="Immagini PLC/lucchetto_c.PNG" alt=""></button>
+            </div>
+            <div class="right-icons">
+                 <button class="btn btn-icon" id="show-errors-btn"><img src="Immagini PLC/Lamp_blu.PNG" alt=""></button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content text-center">
+            <!-- Navigazione Operatori -->
+            <div class="operator-navigation">
+                <button class="btn-nav" id="prev-operator">&lt;</button>
+                <span class="operator-title" id="operator-title">OPERATORE 1</span>
+                <button class="btn-nav" id="next-operator">&gt;</button>
+            </div>
+       
+            <!-- Opzioni Operatore -->
+            <div class="operator-options-container">
+                 <div class="custom-row">
+                    <div class="custom-col">
+                        <div class="option-panel">
+                            <div class="option-header">Ciclo di Svuotamento</div>
+                            <div class="option-controls">
+                                <button class="btn-toggle active btn-on" data-option="svuotamento">ON</button>
+                                <button class="btn-toggle btn-off" data-option="svuotamento">OFF</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="custom-col">
+                        <div class="option-panel">
+                            <div class="option-header">Luci Interno Macchina</div>
+                            <div class="option-controls">
+                                <button class="btn-toggle btn-on" data-option="luci">ON</button>
+                                <button class="btn-toggle active btn-off" data-option="luci">OFF</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="custom-col">
+                        <div class="option-panel">
+                            <div class="option-header">Lamp Test</div>
+                            <div class="option-controls">
+                                <button class="btn-toggle btn-on" data-option="lamptest">ON</button>
+                                <button class="btn-toggle active btn-off" data-option="lamptest">OFF</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="custom-col">
+                        <div class="option-panel">
+                            <div class="option-header">Modalità Manutenzione</div>
+                            <div class="option-controls">
+                                <button class="btn-toggle btn-on" data-option="manutenzione">ON</button>
+                                <button class="btn-toggle active btn-off" data-option="manutenzione">OFF</button>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="custom-col">
+                        <div class="option-panel">
+                            <div class="option-header">Allarmi Audio</div>
+                            <div class="option-controls">
+                                <button class="btn-toggle active btn-on" data-option="audio">ON</button>
+                                <button class="btn-toggle btn-off" data-option="audio">OFF</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="custom-col">
+                        <div class="option-panel">
+                            <div class="option-header">Reset Contatori</div>
+                            <div class="option-controls">
+                                <button class="btn-reset" data-option="reset">RESET</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Bar -->
+        <footer class="bottom-bar d-flex justify-content-between align-items-center px-3">
+            <div class="left-icons">
+                <button class="btn btn-icon-bottom"><img src="Immagini PLC/MAN_BLU.PNG" alt=""></button>
+                <button class="btn btn-icon-bottom"><img src="Immagini PLC/auto_blu.PNG" alt=""></i></button>
+            </div>
+            <div class="datetime" id="datetime-trigger">
+                <span>Ora: <span id="time">09:43:17</span></span>
+                <span>Data: <span id="date">20/06/2025</span></span>
+            </div>
+            <div class="right-icons">
+                <button class="btn btn-icon-bottom active"><img src="Immagini PLC/operatore.PNG" alt=""></button>
+                <button class="btn btn-icon-bottom"><img src="Immagini PLC/manuali.PNG" alt=""></button>
+                <button class="btn btn-icon-bottom"><img src="Immagini PLC/parametri.PNG" alt=""></button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login Operatore</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <input type="text" class="form-control form-control-lg" id="username-input" placeholder="Nome Utente">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control form-control-lg" id="password-input" placeholder="Password">
+                    </div>
+                    
+                    <!-- Virtual Keyboard -->
+                    <div id="virtual-keyboard" class="mt-4"></div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-primary btn-lg" id="login-button">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DateTime Modal -->
+    <div class="modal fade" id="datetimeModal" tabindex="-1" aria-labelledby="datetimeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="datetimeModalLabel">Imposta Data e Ora</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="date-input" class="form-label">Data</label>
+                        <input type="date" class="form-control" id="date-input">
+                    </div>
+                    <div class="mb-3">
+                        <label for="time-input" class="form-label">Ora</label>
+                        <input type="time" class="form-control" id="time-input" step="1">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-primary" id="save-datetime">Salva</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay Errori -->
+    <div class="modal fade" id="errorsModal" tabindex="-1" aria-labelledby="errorsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background:#232a36; color:#fff; border-radius:18px;">
+                <div class="modal-header" style="border-bottom:1px solid #2e3748;">
+                    <h5 class="modal-title" id="errorsModalLabel">Errori di Sistema</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex flex-column align-items-center">
+                    <div id="error-message" style="font-size:2.2rem; text-align:center; min-height:120px; max-width:90vw;"></div>
+                    <div class="d-flex justify-content-between align-items-center mt-4" style="width:100%;">
+                        <button id="prev-error" class="btn btn-secondary btn-lg" style="min-width:100px;">&lt;</button>
+                        <span id="error-index" style="font-size:1.6rem;"></span>
+                        <button id="next-error" class="btn btn-secondary btn-lg" style="min-width:100px;">&gt;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="operatore.js"></script>
+</body>
+</html>

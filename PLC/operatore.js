@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     // ====================================================================
-    // --- SHARED STATE & DOM
+    // --- SHARED STATE & DOM (COPIATO DA script.js)
     // ====================================================================
     let systemDate = new Date();
     let capsLock = false;
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ====================================================================
-    // --- LOGIN MODAL & VIRTUAL KEYBOARD LOGIC (NEW LAYOUT)
+    // --- LOGIN MODAL & VIRTUAL KEYBOARD LOGIC
     // ====================================================================
     const loginLockIcon = document.getElementById('login-lock-icon');
     const loginModalEl = document.getElementById('loginModal');
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
 
     function createKeyboard() {
-        keyboardContainer.innerHTML = ''; // Clear previous keyboard
+        keyboardContainer.innerHTML = '';
 
         keyLayout.forEach(row => {
             const rowElement = document.createElement('div');
@@ -150,13 +150,13 @@ document.addEventListener('DOMContentLoaded', function () {
         
         const key = keyBtn.dataset.key;
 
-        if (key.length === 1) { // Character keys
+        if (key.length === 1) {
             let char = key;
             if (capsLock) {
                 char = char.toUpperCase();
             }
             activeInput.value += char;
-        } else { // Special keys
+        } else {
             switch (key) {
                 case 'backspace':
                     activeInput.value = activeInput.value.slice(0, -1);
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ====================================================================
     // --- ERROR MODAL LOGIC
-    // Errori di esempio (puoi sostituire con dati reali)
+    // ====================================================================
     const errorList = [
         "Errore 101: Sensore non rilevato.",
         "Errore 202: Pressione bassa sull'attuatore.",
@@ -247,13 +247,11 @@ document.addEventListener('DOMContentLoaded', function () {
             if(startX === null) return;
             let endX = e.changedTouches[0].clientX;
             if(endX - startX > 50) {
-                // swipe right
                 if(currentError > 0) {
                     currentError--;
                     updateErrorModal();
                 }
             } else if(startX - endX > 50) {
-                // swipe left
                 if(currentError < errorList.length-1) {
                     currentError++;
                     updateErrorModal();
@@ -264,14 +262,79 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ====================================================================
-    // --- NAVIGATION TO OPERATORE PAGE
+    // --- OPERATORE PAGE LOGIC
     // ====================================================================
-    const operatoreBtn = document.querySelector('[src="Immagini PLC/operatore.PNG"]').parentElement;
-    if(operatoreBtn) {
-        operatoreBtn.addEventListener('click', function() {
-            window.location.href = 'operatore.html';
+    
+    // Operatore navigation
+    let currentOperator = 1;
+    const operatorTitle = document.getElementById('operator-title');
+    const prevOperatorBtn = document.getElementById('prev-operator');
+    const nextOperatorBtn = document.getElementById('next-operator');
+
+    function updateOperatorDisplay() {
+        if (operatorTitle) {
+            operatorTitle.textContent = `OPERATORE ${currentOperator}`;
+        }
+        // Qui puoi aggiungere logica per cambiare le opzioni in base all'operatore
+        console.log(`Switched to Operatore ${currentOperator}`);
+    }
+
+    if (prevOperatorBtn) {
+        prevOperatorBtn.addEventListener('click', function() {
+            if (currentOperator > 1) {
+                currentOperator--;
+                updateOperatorDisplay();
+            }
         });
     }
+
+    if (nextOperatorBtn) {
+        nextOperatorBtn.addEventListener('click', function() {
+            if (currentOperator < 2) {
+                currentOperator++;
+                updateOperatorDisplay();
+            }
+        });
+    }
+    
+    // Home button navigation
+    const homeBtn = document.getElementById('home-btn');
+    if(homeBtn) {
+        homeBtn.addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    }
+
+    // Toggle buttons logic
+    const toggleButtons = document.querySelectorAll('.btn-toggle');
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const optionName = this.dataset.option;
+            const optionButtons = document.querySelectorAll(`[data-option="${optionName}"]`);
+            
+            // Remove active class from all buttons of this option
+            optionButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Log the change (you can replace with actual PLC communication)
+            console.log(`${optionName} set to: ${this.textContent}`);
+        });
+    });
+
+    // Reset button logic
+    const resetButtons = document.querySelectorAll('.btn-reset');
+    resetButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const optionName = this.dataset.option;
+            
+            if(confirm('Sei sicuro di voler resettare i contatori?')) {
+                console.log(`${optionName} executed`);
+                alert('Contatori resettati con successo!');
+            }
+        });
+    });
 
     // Start clock
     setInterval(updateClock, 1000);
