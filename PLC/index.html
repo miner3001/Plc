@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIVETECH HMI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="hmi-container">
+        <!-- Top Bar -->
+        <div class="top-bar d-flex justify-content-between align-items-center px-3">
+            <div class="left-icons">
+                <button class="btn btn-icon"><img src="Immagini PLC/home_.PNG" alt=""></button>
+                <button class="btn btn-icon"><img src="Immagini PLC/statistiche.PNG" alt=""></button>
+                <button class="btn btn-icon"><img src="Immagini PLC/Layout_blu.PNG" alt=""></button>
+                <button class="btn btn-icon"><img src="Immagini PLC/ricette.PNG" alt=""></button>
+                <button class="btn btn-icon" id="login-lock-icon"><img src="Immagini PLC/lucchetto_c.PNG" alt=""></button>
+            </div>
+            <div class="right-icons">
+                 <button class="btn btn-icon"><img src="Immagini PLC/Lamp_blu.PNG" alt=""></button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content text-center">
+            <div class="status-indicators">
+                <div class="status-item status-emergency">EMERGENZA NON RIPRISTINATA</div>
+                <div class="status-item status-alarm">MACCHINA IN ALLARME</div>
+                <div class="status-item status-phasing">MACCHINA IN RIFASAMENTO</div>
+                <div class="status-item status-production">IN PRODUZIONE</div>
+            </div>
+
+            <div class="logo-container">
+                <div class="logo-icon">
+                   <img src="logo_html.png" alt="LIVETECH Logo" class="img-fluid">
+                </div>
+            </div>
+
+            <div class="data-panels-container">
+                 <div class="custom-row">
+                    <div class="custom-col">
+                        <div class="data-panel">
+                            <div class="panel-header">Ricetta Attuale [N]</div>
+                            <div class="panel-body">3</div>
+                        </div>
+                    </div>
+                    <div class="custom-col">
+                        <div class="data-panel">
+                            <div class="panel-header">Robot 1 Riempimento [cicli/min]</div>
+                            <div class="panel-body">0,0</div>
+                        </div>
+                    </div>
+                    <div class="custom-col">
+                        <div class="data-panel">
+                            <div class="panel-header">Robot 2 Spintore Prodotti [cicli/min]</div>
+                            <div class="panel-body">0,0</div>
+                        </div>
+                    </div>
+                    <div class="custom-col">
+                        <div class="data-panel">
+                            <div class="panel-header">Ordinatore [cicli/min]</div>
+                            <div class="panel-body">0,0</div>
+                        </div>
+                    </div>
+                     <div class="custom-col">
+                        <div class="data-panel">
+                            <div class="panel-header">Catena [cicli/min]</div>
+                            <div class="panel-body">0,0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Bar -->
+        <footer class="bottom-bar d-flex justify-content-between align-items-center px-3">
+            <div class="left-icons">
+                <button class="btn btn-icon-bottom"><img src="Immagini PLC/MAN_BLU.PNG" alt=""></button>
+                <button class="btn btn-icon-bottom"><img src="Immagini PLC/auto_blu.PNG" alt=""></i></button>
+            </div>
+            <div class="datetime" id="datetime-trigger">
+                <span>Ora: <span id="time">09:43:17</span></span>
+                <span>Data: <span id="date">20/06/2025</span></span>
+            </div>
+            <div class="right-icons">
+                <button class="btn btn-icon-bottom"><img src="Immagini PLC/operatore.PNG" alt=""></button>
+                <button class="btn btn-icon-bottom"><img src="Immagini PLC/manuali.PNG" alt=""></button>
+                <button class="btn btn-icon-bottom"><img src="Immagini PLC/parametri.PNG" alt=""></button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login Operatore</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <input type="text" class="form-control form-control-lg" id="username-input" placeholder="Nome Utente">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control form-control-lg" id="password-input" placeholder="Password">
+                    </div>
+                    
+                    <!-- Virtual Keyboard -->
+                    <div id="virtual-keyboard" class="mt-4"></div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-primary btn-lg" id="login-button">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DateTime Modal -->
+    <div class="modal fade" id="datetimeModal" tabindex="-1" aria-labelledby="datetimeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="datetimeModalLabel">Imposta Data e Ora</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="date-input" class="form-label">Data</label>
+                        <input type="date" class="form-control" id="date-input">
+                    </div>
+                    <div class="mb-3">
+                        <label for="time-input" class="form-label">Ora</label>
+                        <input type="time" class="form-control" id="time-input" step="1">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-primary" id="save-datetime">Salva</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
