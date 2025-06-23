@@ -1460,6 +1460,7 @@ body, .hmi-container {
     align-items: center;
     justify-content: center;
 }
+
 #errorsModal .btn-error-nav:hover {
     transform: translateY(-3px) scale(1.1);
     box-shadow: 
@@ -1596,5 +1597,198 @@ body, .hmi-container {
         height: 28vw;
         max-width: 400px;
         max-height: 125px;
+    }
+}
+
+/* =================================================================== */
+/* STILI PAGINA STATISTICHE */
+/* =================================================================== */
+
+.stats-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    gap: 30px;
+}
+
+.stats-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
+    background: linear-gradient(45deg, 
+        #fff 0%, 
+        #00ff88 25%, 
+        #fff 50%, 
+        #52a7ff 75%, 
+        #fff 100%);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: hologram 4s ease-in-out infinite;
+    min-width: 400px;
+    text-align: center;
+}
+
+.stats-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.stats-page {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stats-page.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    animation: pageSlideIn 0.6s ease-out;
+}
+
+@keyframes pageSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.prev-btn, .next-btn {
+    background: linear-gradient(135deg, 
+        rgba(35, 42, 54, 0.95) 0%, 
+        rgba(46, 55, 72, 0.95) 100%);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 8px 25px rgba(0,0,0,0.3),
+        0 0 0 1px rgba(255,255,255,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.prev-btn:hover, .next-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 12px 35px rgba(0,0,0,0.4),
+        0 0 0 1px rgba(255,255,255,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.4);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.prev-btn:active, .next-btn:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+.prev-btn img, .next-btn img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+    filter: 
+        drop-shadow(0 2px 4px rgba(0,0,0,0.5)) 
+        brightness(1.1) 
+        contrast(1.2);
+}
+
+.prev-btn:hover img, .next-btn:hover img {
+    filter: 
+        drop-shadow(0 4px 8px rgba(0,0,0,0.6)) 
+        brightness(1.3) 
+        contrast(1.3);
+}
+
+/* Animazioni specifiche per i pannelli delle statistiche */
+.stats-page .data-panel {
+    animation-duration: 0.6s;
+    animation-fill-mode: both;
+}
+
+.stats-page.active .data-panel {
+    animation-name: statsApear;
+}
+
+@keyframes statsApear {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Effetti speciali per le statistiche */
+.stats-page .data-panel .panel-body {
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, 
+        rgba(0, 255, 136, 0.1) 0%, 
+        rgba(82, 167, 255, 0.1) 100%);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-page .data-panel .panel-body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(0, 255, 136, 0.2), 
+        transparent);
+    animation: statsGlow 3s ease-in-out infinite;
+}
+
+@keyframes statsGlow {
+    0%, 100% { left: -100%; }
+    50% { left: 100%; }
+}
+
+/* Indicatori numerici animati */
+.stats-page .panel-body {
+    color: #00ff88;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+/* Media queries per responsive */
+@media (max-width: 768px) {
+    .stats-navigation {
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .stats-title {
+        font-size: 2.5rem;
+        min-width: 250px;
+    }
+    
+    .prev-btn, .next-btn {
+        width: 60px;
+        height: 60px;
     }
 }
