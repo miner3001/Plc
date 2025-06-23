@@ -336,6 +336,55 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // LOGICA MANO/AUTO
+    const btnMano = document.getElementById('btn-mano');
+    const btnAuto = document.getElementById('btn-auto');
+    const imgMano = document.getElementById('img-mano');
+    const imgAuto = document.getElementById('img-auto');
+
+    if (imgMano) imgMano.style.transition = 'filter 0.3s, transform 0.3s, opacity 0.3s';
+    if (imgAuto) imgAuto.style.transition = 'filter 0.3s, transform 0.3s, opacity 0.3s';
+
+    let stato = 'auto';
+    function animateImageChange(img, newSrc) {
+        img.style.opacity = '0';
+        img.style.transform = 'scale(0.8) rotate(-10deg)';
+        setTimeout(() => {
+            img.src = newSrc;
+            img.style.filter = 'blur(2px)';
+            img.style.transform = 'scale(1.1) rotate(8deg)';
+            setTimeout(() => {
+                img.style.opacity = '1';
+                img.style.filter = 'blur(0)';
+                img.style.transform = 'scale(1) rotate(0deg)';
+            }, 120);
+        }, 180);
+    }
+    function aggiornaColori() {
+        if (stato === 'mano') {
+            animateImageChange(imgMano, 'Immagini PLC/MAN_ROSSA.PNG');
+            animateImageChange(imgAuto, 'Immagini PLC/auto_blu.PNG');
+        } else {
+            animateImageChange(imgMano, 'Immagini PLC/MAN_BLU.PNG');
+            animateImageChange(imgAuto, 'Immagini PLC/auto_rossa.PNG');
+        }
+    }
+    if (btnMano && btnAuto && imgMano && imgAuto) {
+        btnMano.addEventListener('click', function() {
+            if (stato !== 'mano') {
+                stato = 'mano';
+                aggiornaColori();
+            }
+        });
+        btnAuto.addEventListener('click', function() {
+            if (stato !== 'auto') {
+                stato = 'auto';
+                aggiornaColori();
+            }
+        });
+        aggiornaColori();
+    }
+
     // Start clock
     setInterval(updateClock, 1000);
     updateClock();

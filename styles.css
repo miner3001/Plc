@@ -1152,3 +1152,389 @@ body, .hmi-container {
         max-width: 99vw;
     }
 }
+
+/* MODAL DATETIME MODERNO E SCURO */
+#datetimeModal .modal-dialog {
+    max-width: 600px;
+    width: 95vw;
+    margin: 0 auto;
+}
+#datetimeModal .modal-content {
+    background: linear-gradient(135deg, #232a36 0%, #181c24 100%);
+    color: #fff;
+    border-radius: 28px;
+    border: 2px solid rgba(255,255,255,0.08);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05);
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+}
+#datetimeModal .modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        transparent 0%, 
+        rgba(255,255,255,0.03) 50%, 
+        transparent 100%);
+    pointer-events: none;
+}
+#datetimeModal .modal-header {
+    background: transparent;
+    border: none;
+    text-align: center;
+    padding-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+#datetimeModal .modal-title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    background: linear-gradient(45deg, #fff 0%, #00ff88 50%, #52a7ff 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: hologram 3s ease-in-out infinite;
+}
+#datetimeModal .modal-body {
+    padding: 20px 0;
+    position: relative;
+    z-index: 1;
+}
+#datetimeModal .form-label {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 12px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+#datetimeModal .form-control {
+    background: linear-gradient(135deg, #2a3441 0%, #232a36 100%);
+    color: #fff;
+    border: 2px solid #444a5a;
+    border-radius: 16px;
+    font-size: 2.2rem;
+    padding: 18px 20px;
+    margin-bottom: 24px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.2);
+}
+#datetimeModal .form-control:focus {
+    border-color: #00ff88;
+    box-shadow: 0 0 0 3px rgba(0,255,136,0.2), inset 0 2px 8px rgba(0,0,0,0.2);
+    background: linear-gradient(135deg, #2a3441 0%, #232a36 100%);
+    color: #fff;
+    outline: none;
+    transform: translateY(-2px);
+}
+#datetimeModal .modal-footer {
+    background: transparent;
+    border: none;
+    padding-top: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+#datetimeModal .btn-primary {
+    background: linear-gradient(135deg, #00ff88 0%, #00d469 100%);
+    border: none;
+    color: #232a36;
+    font-size: 2.1rem;
+    border-radius: 16px;
+    padding: 16px 40px;
+    font-weight: 700;
+    box-shadow: 0 4px 16px rgba(0,255,136,0.3), 0 0 0 1px rgba(0,255,136,0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+#datetimeModal .btn-primary:hover {
+    background: linear-gradient(135deg, #00d469 0%, #00ff88 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,255,136,0.4), 0 0 0 2px rgba(0,255,136,0.3);
+}
+#datetimeModal .btn-secondary {
+    background: linear-gradient(135deg, #444a5a 0%, #3a3f4a 100%);
+    color: #fff;
+    font-size: 2.1rem;
+    border-radius: 16px;
+    padding: 16px 40px;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0 4px 16px rgba(68,74,90,0.3), 0 0 0 1px rgba(68,74,90,0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#datetimeModal .btn-secondary:hover {
+    background: linear-gradient(135deg, #3a3f4a 0%, #444a5a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(68,74,90,0.4), 0 0 0 2px rgba(68,74,90,0.3);
+}
+#datetimeModal .btn-close {
+    filter: invert(1) grayscale(1);
+    opacity: 0.7;
+    font-size: 2.2rem;
+    transition: all 0.3s ease;
+}
+#datetimeModal .btn-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+/* Effetto glow animato per il modal datetime */
+#datetimeModal .modal-content::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #00ff88, #52a7ff, #00ff88, #52a7ff);
+    background-size: 400% 400%;
+    border-radius: 30px;
+    z-index: -1;
+    animation: gradientShift 4s ease infinite;
+    opacity: 0.3;
+}
+
+/* MODAL ERRORI MODERNO E ANIMATO */
+#errorsModal .modal-dialog {
+    max-width: 800px;
+    width: 95vw;
+    margin: 0 auto;
+}
+#errorsModal .modal-content {
+    background: linear-gradient(135deg, #2c1810 0%, #1a0f08 100%);
+    color: #fff;
+    border-radius: 32px;
+    border: 2px solid rgba(255,100,100,0.2);
+    box-shadow: 
+        0 20px 60px rgba(0,0,0,0.8), 
+        0 0 0 1px rgba(255,100,100,0.1),
+        0 0 40px rgba(255,100,100,0.15);
+    padding: 30px;
+    overflow: hidden;
+    position: relative;
+    animation: errorModalAppear 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes errorModalAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+#errorsModal .modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(255,100,100,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255,150,150,0.08) 0%, transparent 50%);
+    pointer-events: none;
+    animation: errorAmbient 4s ease-in-out infinite alternate;
+}
+@keyframes errorAmbient {
+    0% { opacity: 0.3; }
+    100% { opacity: 0.7; }
+}
+#errorsModal .modal-header {
+    background: linear-gradient(135deg, rgba(192,57,43,0.2) 0%, rgba(231,76,60,0.1) 100%);
+    border: none;
+    border-radius: 20px 20px 0 0;
+    padding: 25px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    margin: -30px -30px 20px -30px;
+    border-bottom: 1px solid rgba(255,100,100,0.2);
+}
+#errorsModal .modal-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(255,100,100,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+#errorsModal .modal-title i {
+    font-size: 3.5rem;
+    color: #ff6b6b;
+    animation: pulseError 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(255,107,107,0.5));
+}
+@keyframes pulseError {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+#errorsModal .modal-body {
+    padding: 30px 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+#errorsModal .error-icon-container {
+    margin-bottom: 25px;
+}
+#errorsModal .error-icon {
+    font-size: 8rem;
+    color: #ff4757;
+    animation: errorIconFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(255,71,87,0.4));
+}
+@keyframes errorIconFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-10px) rotate(2deg); }
+    75% { transform: translateY(5px) rotate(-1deg); }
+}
+#errorsModal .error-message-text {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(46,55,72,0.3) 0%, rgba(35,42,54,0.3) 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(255,100,100,0.2);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    animation: messageGlow 2s ease-in-out infinite alternate;
+    position: relative;
+    overflow: hidden;
+}
+@keyframes messageGlow {
+    0% { box-shadow: 0 0 20px rgba(255,100,100,0.2); }
+    100% { box-shadow: 0 0 30px rgba(255,100,100,0.4); }
+}
+#errorsModal .error-message-text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255,255,255,0.1), 
+        transparent);
+    animation: scanLine 3s linear infinite;
+}
+@keyframes scanLine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+#errorsModal .error-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 20px;
+}
+#errorsModal .btn-error-nav {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff4757 0%, #ff3742 100%);
+    border: none;
+    color: #fff;
+    font-size: 2.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 8px 25px rgba(255,71,87,0.4),
+        0 0 0 1px rgba(255,71,87,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#errorsModal .btn-error-nav:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 
+        0 12px 35px rgba(255,71,87,0.6),
+        0 0 0 2px rgba(255,71,87,0.5);
+    background: linear-gradient(135deg, #ff3742 0%, #ff4757 100%);
+}
+#errorsModal .btn-error-nav:active {
+    transform: translateY(-1px) scale(0.95);
+}
+#errorsModal .error-index {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, rgba(46,55,72,0.6) 0%, rgba(35,42,54,0.6) 100%);
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: 1px solid rgba(255,100,100,0.3);
+    min-width: 120px;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    animation: indexPulse 2s ease-in-out infinite;
+}
+@keyframes indexPulse {
+    0%, 100% { border-color: rgba(255,100,100,0.3); }
+    50% { border-color: rgba(255,100,100,0.6); }
+}
+#errorsModal .btn-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255,71,87,0.2);
+    border: 1px solid rgba(255,71,87,0.3);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.8rem;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+#errorsModal .btn-close:hover {
+    background: rgba(255,71,87,0.4);
+    border-color: rgba(255,71,87,0.6);
+    transform: scale(1.1);
+}
+/* Effetto bordo luminoso animato per modal errori */
+#errorsModal .modal-content::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(45deg, #ff4757, #ff6b6b, #ff4757, #ff6b6b);
+    background-size: 400% 400%;
+    border-radius: 35px;
+    z-index: -1;
+    animation: errorBorderGlow 3s ease infinite;
+    opacity: 0.6;
+}
+@keyframes errorBorderGlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Animazione di shake per errori critici */
+.error-shake {
+    animation: errorShake 0.5s ease-in-out;
+}
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
