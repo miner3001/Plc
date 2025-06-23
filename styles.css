@@ -1538,3 +1538,63 @@ body, .hmi-container {
     25% { transform: translateX(-5px); }
     75% { transform: translateX(5px); }
 }
+
+/* Logo container migliorato */
+.logo-container {
+    margin: 40px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo-icon img {
+    width: 1080px;
+    height: 340px;
+    object-fit: contain;
+    filter: 
+        drop-shadow(0 8px 16px rgba(0,0,0,0.4)) 
+        brightness(1.1) 
+        contrast(1.1);
+    transition: all 0.3s ease;
+    animation: logoGlow 4s ease-in-out infinite alternate;
+}
+
+.logo-icon img:hover {
+    transform: scale(1.05);
+    filter: 
+        drop-shadow(0 12px 24px rgba(0,0,0,0.5)) 
+        brightness(1.2) 
+        contrast(1.2);
+}
+
+@keyframes logoGlow {
+    0% {
+        filter: 
+            drop-shadow(0 8px 16px rgba(0,0,0,0.4)) 
+            brightness(1.1) 
+            contrast(1.1);
+    }
+    100% {
+        filter: 
+            drop-shadow(0 12px 20px rgba(0,0,0,0.6)) 
+            brightness(1.15) 
+            contrast(1.15)
+            drop-shadow(0 0 30px rgba(255,255,255,0.1));
+    }
+}
+
+@media (max-width: 768px) {
+    .logo-icon img {
+        width: 90vw;
+        height: 28vw;
+        max-width: 400px;
+        max-height: 125px;
+    }
+}
