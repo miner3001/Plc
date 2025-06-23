@@ -1015,3 +1015,140 @@ body, .hmi-container {
 .btn-reset:active {
     transform: translateY(0) scale(0.98);
 }
+
+/* Tastiera virtuale per login */
+#virtual-keyboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+    user-select: none;
+    width: 100%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+.keyboard-key {
+    min-width: 70px;
+    min-height: 70px;
+    font-size: 2.2rem;
+    border-radius: 18px;
+    border: none;
+    background: #e9ecef;
+    color: #222;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin: 0 2px;
+    transition: background 0.15s, color 0.15s, transform 0.1s;
+    font-family: inherit;
+    font-weight: 500;
+    outline: none;
+    padding: 0 10px;
+}
+.keyboard-key:active, .keyboard-key.active {
+    background: #007bff;
+    color: #fff;
+    transform: scale(0.97);
+}
+.key-backspace, .key-enter, .key-shift {
+    min-width: 110px;
+    font-size: 1.5rem;
+}
+.key-space {
+    min-width: 400px;
+    font-size: 2rem;
+}
+@media (max-width: 900px) {
+    .keyboard-key { min-width: 50px; min-height: 50px; font-size: 1.3rem; }
+    .key-space { min-width: 180px; }
+}
+
+/* MODAL LOGIN GRANDE E SCURA */
+#loginModal .modal-dialog {
+    max-width: 900px;
+    width: 98vw;
+    margin: 0 auto;
+}
+#loginModal .modal-content {
+    background: linear-gradient(135deg, #232a36 0%, #181c24 100%);
+    color: #fff;
+    border-radius: 32px;
+    border: 2px solid rgba(255,255,255,0.08);
+    box-shadow: 0 12px 48px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04);
+    padding: 24px 18px 18px 18px;
+}
+#loginModal .modal-header, #loginModal .modal-footer {
+    background: transparent;
+    border: none;
+}
+#loginModal .modal-title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+#loginModal .form-control {
+    background: #232a36;
+    color: #fff;
+    border: 1.5px solid #444a5a;
+    border-radius: 12px;
+    font-size: 2.2rem;
+    padding: 18px 16px;
+    margin-bottom: 18px;
+}
+#loginModal .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px #007bff33;
+    background: #232a36;
+    color: #fff;
+}
+#loginModal .btn-primary {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    border: none;
+    color: #fff;
+    font-size: 2.1rem;
+    border-radius: 12px;
+    padding: 14px 38px;
+    font-weight: 600;
+    box-shadow: 0 2px 12px rgba(0,123,255,0.15);
+    transition: background 0.2s;
+}
+#loginModal .btn-primary:hover {
+    background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
+}
+#loginModal .btn-secondary {
+    background: #444a5a;
+    color: #fff;
+    font-size: 2.1rem;
+    border-radius: 12px;
+    padding: 14px 38px;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0 2px 12px rgba(44,62,80,0.12);
+}
+#loginModal .btn-close {
+    filter: invert(1) grayscale(1);
+    opacity: 0.7;
+    font-size: 2.2rem;
+}
+#loginModal .modal-body {
+    padding-bottom: 0;
+}
+#virtual-keyboard {
+    margin-bottom: 0;
+    margin-top: 24px;
+}
+@media (max-width: 1200px) {
+    #loginModal .modal-dialog {
+        max-width: 99vw;
+    }
+    #virtual-keyboard {
+        max-width: 99vw;
+    }
+}

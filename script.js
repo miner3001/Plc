@@ -87,37 +87,39 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
 
     function createKeyboard() {
-        keyboardContainer.innerHTML = ''; // Clear previous keyboard
-
-        keyLayout.forEach(row => {
+        keyboardContainer.innerHTML = '';
+        keyLayout.forEach((row, rowIdx) => {
             const rowElement = document.createElement('div');
             rowElement.classList.add('keyboard-row');
-
             row.forEach(key => {
                 const keyElement = document.createElement('button');
                 keyElement.classList.add('keyboard-key');
                 keyElement.setAttribute('data-key', key);
-
                 switch (key) {
                     case 'backspace':
                         keyElement.innerHTML = '<i class="fas fa-backspace"></i>';
                         keyElement.classList.add('key-backspace');
+                        keyElement.title = 'Backspace';
                         break;
                     case 'caps':
                         keyElement.textContent = 'Caps';
                         keyElement.classList.add('key-caps');
                         if (capsLock) keyElement.classList.add('active');
+                        keyElement.title = 'Blocca Maiuscole';
                         break;
                     case 'enter':
-                        keyElement.textContent = 'Enter';
+                        keyElement.textContent = 'Invio';
                         keyElement.classList.add('key-enter');
+                        keyElement.title = 'Invio';
                         break;
                     case 'shift':
                         keyElement.textContent = 'Shift';
                         keyElement.classList.add('key-shift');
+                        keyElement.title = 'Maiuscole temporanee';
                         break;
                     case 'space':
                         keyElement.classList.add('key-space');
+                        keyElement.title = 'Spazio';
                         break;
                     default:
                         keyElement.textContent = capsLock ? key.toUpperCase() : key.toLowerCase();
